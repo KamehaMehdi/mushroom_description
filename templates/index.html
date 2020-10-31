@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html style="height: 100%;" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mushrooms</title>
+	<script>
+		const verification = async () => {
+			const mushroomAttribut = [
+				parseFloat(document.getElementById('odor').value),
+				parseFloat(document.getElementById('cap-shap').value),
+				parseFloat(document.getElementById('bruises').value),
+				parseFloat(document.getElementById('population').value),
+				parseFloat(document.getElementById('habitat').value)
+			]
+
+			try {
+				const request = await fetch(`/results?mushroom=${JSON.stringify(mushroomAttribut)}`)
+				const response = await request.json()
+				alert(
+					response
+						? "Le champignon est probablement vénéneux"
+						: "Le champignon n'est probablement pas vénéneux"
+				)
+			} catch (error) {
+
+			}
+		}
+
+	</script>
+	<style>
+		body {
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+		}
+		h1 {
+			margin-top: 10%;
+			align-self: center;
+			margin-bottom: 50px;
+		}
+		div {
+			display: flex;
+			width: 100%;
+			justify-content: space-evenly;
+			margin-bottom: 50px;
+		}
+	</style>
+</head>
+<body>
+	<h1>Votre champignon est il vénéneu ?</h1>
+	<div style="display: flex;">
+		<form id="mushroom_form">
+		<label for="odor"> Odeur du champignon </label>
+		<select name="odor" id="odor">
+			<option value="0"> Aucune </option>
+			<option value="1"> Anis </option>
+			<option value="2"> Goudron </option>
+			<option value="3"> Poisson </option>
+			<option value="4"> Forte </option>
+			<option value="5"> Moisi </option>
+			<option value="6"> Amande </option>
+			<option value="7"> Âcre </option>
+			<option value="8"> Épicé </option>
+		</select>
+		<label for="cap-shap"> Forme du châpeau </label>
+		<select name="cap-shap" id="cap-shap">
+			<option value="0"> Clôche </option>
+			<option value="1"> Conique </option>
+			<option value="2"> Convex </option>
+			<option value="3"> Plat </option>
+			<option value="4"> Bouton au centre </option>
+			<option value="5"> Creu </option>
+		</select>
+		<label for="bruises"> Tâches </label>
+		<select name="bruises" id="bruises">
+			<option value="0"> Sans </option>
+			<option value="1"> Avec </option>
+		</select>
+		<label for="population"> Population </label>
+		<select name="population" id="population">
+			<option value="0"> Abondant </option>
+			<option value="1"> Isolés </option>
+			<option value="2"> Nombreux </option>
+			<option value="3"> Eparse </option>
+			<option value="4"> Sévère </option>
+			<option value="5"> Solitaire </option>
+		</select>
+		<label for="habitat"> Habitat </label>
+		<select name="habitat" id="habitat">
+			<option value="0"> Herbus </option>
+			<option value="1"> Feuillu </option>
+			<option value="2"> Prairie </option>
+			<option value="3"> Chemin </option>
+			<option value="4"> Urbain </option>
+			<option value="5"> Terrain isolé </option>
+			<option value="6"> Forêts </option>
+		</select>
+	</form>
+	</div>
+	<div>
+		<button onclick="verification()"> Vérifier </button>
+	</div>
+</body>
+</html>
